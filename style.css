@@ -1,0 +1,1106 @@
+/* ============================================
+   POKÉBÓVEDA - ESTILOS PRINCIPALES
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Pacifico&display=swap');
+
+:root {
+    --rosa: #f49ac2;
+    --rosa-fuerte: #ec6fa9;
+    --rosa-claro: #fff0f7;
+    --lavanda: #e8dcff;
+    --morado: #a78bdb;
+    --texto: #55445d;
+    --blanco: #ffffff;
+    --sombra: 0 8px 25px rgba(145, 91, 139, 0.13);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'Nunito', sans-serif;
+    color: var(--texto);
+    background:
+        radial-gradient(circle at 10% 10%, #fff1f8, transparent 35%),
+        radial-gradient(circle at 90% 30%, #f2eaff, transparent 35%),
+        linear-gradient(135deg, #fffafd, #f8f1ff);
+    overflow-x: hidden;
+}
+
+/* ============================================
+   FONDO ANIMADO DE POKÉBOLAS
+   ============================================ */
+
+.pokemon-bg-animation {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.pokeball {
+    position: absolute;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    opacity: 0.15;
+    border: 2px solid #e47cac;
+    background: linear-gradient(
+        to bottom,
+        #f59ac1 0%,
+        #f59ac1 46%,
+        #795b7f 47%,
+        #795b7f 53%,
+        #fff 54%,
+        #fff 100%
+    );
+    animation: flotar 17s linear infinite;
+}
+
+.pokeball::after {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: white;
+    border: 3px solid #795b7f;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.pokeball:nth-child(1) {
+    left: 8%;
+    animation-duration: 19s;
+    animation-delay: -2s;
+}
+
+.pokeball:nth-child(2) {
+    left: 22%;
+    animation-duration: 23s;
+    animation-delay: -8s;
+    transform: scale(0.7);
+}
+
+.pokeball:nth-child(3) {
+    left: 38%;
+    animation-duration: 16s;
+    animation-delay: -5s;
+}
+
+.pokeball:nth-child(4) {
+    left: 54%;
+    animation-duration: 25s;
+    animation-delay: -12s;
+    transform: scale(0.8);
+}
+
+.pokeball:nth-child(5) {
+    left: 68%;
+    animation-duration: 18s;
+    animation-delay: -4s;
+}
+
+.pokeball:nth-child(6) {
+    left: 82%;
+    animation-duration: 21s;
+    animation-delay: -10s;
+    transform: scale(0.65);
+}
+
+.pokeball:nth-child(7) {
+    left: 94%;
+    animation-duration: 24s;
+    animation-delay: -6s;
+}
+
+.pokeball:nth-child(8) {
+    left: 45%;
+    animation-duration: 22s;
+    animation-delay: -15s;
+    transform: scale(0.6);
+}
+
+@keyframes flotar {
+    0% {
+        top: 110%;
+        rotate: 0deg;
+    }
+
+    100% {
+        top: -100px;
+        rotate: 360deg;
+    }
+}
+
+/* ============================================
+   ENCABEZADO
+   ============================================ */
+
+.encabezado-principal {
+    width: 100%;
+    padding: 25px 20px 35px;
+    text-align: center;
+    position: relative;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 230, 243, 0.92),
+        rgba(238, 228, 255, 0.92)
+    );
+    border-bottom: 4px solid rgba(238, 158, 198, 0.5);
+    box-shadow: var(--sombra);
+}
+
+/* LOGO */
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.logo-img {
+    width: 230px;
+    height: 230px;
+    object-fit: contain;
+    filter: drop-shadow(0 7px 8px rgba(100, 70, 100, 0.15));
+}
+
+/* TÍTULO Y POKÉMON */
+
+.titulo-con-pokemon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 65px;
+    margin: 5px auto 15px;
+}
+
+.titulo-con-pokemon h1 {
+    font-family: 'Pacifico', cursive;
+    font-size: clamp(48px, 7vw, 82px);
+    font-weight: 400;
+    color: #ed77ad;
+    text-shadow:
+        3px 4px 0 white,
+        5px 7px 10px rgba(180, 101, 151, 0.25);
+    margin: 0;
+    line-height: 1.35;
+    letter-spacing: 1px;
+}
+
+.pokemon-decoracion {
+    width: 125px;
+    height: 125px;
+    object-fit: contain;
+    filter: drop-shadow(0 6px 5px rgba(100, 70, 100, 0.15));
+    animation: pokemonFlotando 3s ease-in-out infinite;
+}
+
+.pokemon-decoracion:last-child {
+    animation-delay: 1.5s;
+}
+
+@keyframes pokemonFlotando {
+    0%, 100% {
+        transform: translateY(0) rotate(-4deg);
+    }
+
+    50% {
+        transform: translateY(-12px) rotate(4deg);
+    }
+}
+
+.frase-maquina {
+    font-size: 19px;
+    font-weight: 800;
+    color: #9874b4;
+    margin: 12px 0;
+}
+
+.link-buscar-carta {
+    display: inline-block;
+    margin-top: 10px;
+    color: #d75f9d;
+    font-weight: 800;
+    text-decoration: none;
+    transition: 0.25s;
+}
+
+.link-buscar-carta:hover {
+    color: #a35cc2;
+    transform: translateY(-2px);
+}
+
+/* ============================================
+   BUSCADOR
+   ============================================ */
+
+.contenedor-busqueda {
+    max-width: 680px;
+    padding: 20px;
+    margin: 30px auto 10px;
+}
+
+#buscarPokemon {
+    width: 100%;
+    padding: 17px 23px;
+    border: 2px solid #f1b3d0;
+    border-radius: 35px;
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--texto);
+    font-family: 'Nunito', sans-serif;
+    font-size: 16px;
+    outline: none;
+    box-shadow: var(--sombra);
+    transition: 0.3s;
+}
+
+#buscarPokemon:focus {
+    border-color: var(--morado);
+    box-shadow: 0 0 0 4px rgba(167, 139, 219, 0.15);
+}
+
+/* ============================================
+   BOTÓN DEL CARRITO
+   ============================================ */
+
+.zona-carrito {
+    display: flex;
+    justify-content: center;
+    margin: 15px auto 25px;
+}
+
+#btnAbrirCarrito {
+    border: none;
+    border-radius: 30px;
+    padding: 13px 25px;
+    background: linear-gradient(135deg, #ed88b7, #b18bdc);
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: var(--sombra);
+    transition: 0.25s;
+}
+
+#btnAbrirCarrito:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 22px rgba(185, 110, 169, 0.25);
+}
+
+#cantidadCarrito {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 25px;
+    height: 25px;
+    margin-left: 5px;
+    border-radius: 50%;
+    background: white;
+    color: #d966a2;
+    font-weight: 900;
+}
+
+/* ============================================
+   CATÁLOGO
+   ============================================ */
+
+.contenedor-productos {
+    width: min(1200px, 94%);
+    margin: 25px auto 65px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 30px;
+    align-items: start;
+}
+
+.producto {
+    padding: 16px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.91);
+    border: 1px solid rgba(238, 173, 207, 0.5);
+    border-radius: 22px;
+    box-shadow: var(--sombra);
+    transition: transform 0.3s, box-shadow 0.3s;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.producto:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 15px 30px rgba(158, 103, 153, 0.2);
+}
+
+.carta-3d {
+    width: 180px;
+    height: 250px;
+    margin: 0 auto 15px;
+    position: relative;
+    perspective: 1000px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.cara {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 13px;
+    overflow: hidden;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transition: transform 0.65s ease;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.16);
+}
+
+.frente {
+    transform: rotateY(0deg);
+}
+
+.atras {
+    transform: rotateY(180deg);
+}
+
+.carta-3d.volteada .frente {
+    transform: rotateY(-180deg);
+}
+
+.carta-3d.volteada .atras {
+    transform: rotateY(0deg);
+}
+
+.carta-real {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+}
+
+/* ============================================
+   INFORMACIÓN Y NOMBRE DE LAS CARTAS
+   ============================================ */
+
+.info-carta {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 2px 2px;
+    text-align: center;
+}
+
+.info-carta .nombre-carta,
+.nombre-carta {
+    width: 100%;
+    color: #b84f91;
+    font-size: clamp(17px, 1.5vw, 21px);
+    font-weight: 900;
+    line-height: 1.25;
+    margin: 8px 0 3px;
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+}
+
+.info-carta .coleccion-carta,
+.coleccion-carta {
+    color: #8d759c;
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 1.35;
+    margin: 2px 0;
+    min-height: 17px;
+    overflow-wrap: anywhere;
+}
+
+.info-carta .precio-cop,
+.precio-cop {
+    color: #9b59a9;
+    font-size: 14px;
+    font-weight: 900;
+    margin: 7px 0 9px;
+}
+
+/* BOTÓN DE COMPRA */
+
+.btn-comprar {
+    width: 100%;
+    border: none;
+    border-radius: 25px;
+    padding: 11px 8px;
+    background: linear-gradient(135deg, #ed8ab9, #bd91e5);
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    font-weight: 900;
+    cursor: pointer;
+    transition: 0.25s;
+    margin-top: 5px;
+    min-height: 42px;
+}
+
+.btn-comprar:hover {
+    transform: scale(1.04);
+    filter: brightness(1.04);
+}
+
+/* MENSAJES DEL CATÁLOGO */
+
+.mensaje-catalogo {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 35px 15px;
+    color: #a56caa;
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.mensaje-catalogo.error {
+    color: #d65d83;
+}
+
+/* ============================================
+   FORMULARIO DE SOLICITUD
+   ============================================ */
+
+.seccion-solicitud {
+    max-width: 680px;
+    margin: 60px auto;
+    padding: 35px;
+    width: 92%;
+    background: rgba(255, 255, 255, 0.93);
+    border: 1px solid #f3c5db;
+    border-radius: 25px;
+    box-shadow: var(--sombra);
+}
+
+.seccion-solicitud h2 {
+    color: #d76ba5;
+    text-align: center;
+}
+
+.seccion-solicitud > p {
+    text-align: center;
+    color: #89758f;
+}
+
+.form-cute {
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+    margin-top: 25px;
+}
+
+.grupo-input {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.grupo-input label {
+    color: #936d9c;
+    font-weight: 800;
+}
+
+.grupo-input input,
+.grupo-input textarea {
+    width: 100%;
+    border: 2px solid #f0c6dc;
+    border-radius: 13px;
+    padding: 13px;
+    font-family: 'Nunito', sans-serif;
+    color: var(--texto);
+    background: #fffaff;
+    outline: none;
+    resize: vertical;
+}
+
+.grupo-input input:focus,
+.grupo-input textarea:focus {
+    border-color: var(--morado);
+}
+
+.btn-enviar {
+    border: none;
+    padding: 14px;
+    border-radius: 25px;
+    background: linear-gradient(135deg, #ed88b7, #b18bdc);
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.mensaje-exito {
+    color: #6eaa81;
+    text-align: center;
+    font-weight: 800;
+    margin-top: 15px;
+}
+
+/* ============================================
+   CHATBOT POKEBOT
+   ============================================ */
+
+#contenedorChatbot {
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+    z-index: 1000;
+}
+
+.btn-flotante {
+    border: none;
+    border-radius: 30px;
+    padding: 15px 22px;
+    color: white;
+    background: linear-gradient(135deg, #e77eae, #ac83dc);
+    font-family: 'Nunito', sans-serif;
+    font-size: 15px;
+    font-weight: 900;
+    cursor: pointer;
+    box-shadow: 0 7px 20px rgba(120, 80, 130, 0.25);
+}
+
+.ventana-chat {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    right: 0;
+    bottom: 65px;
+    width: min(340px, calc(100vw - 35px));
+    height: 440px;
+    max-height: calc(100vh - 110px);
+    overflow: hidden;
+    background: white;
+    border: 2px solid #f1c3dc;
+    border-radius: 20px;
+    box-shadow: 0 12px 35px rgba(90, 60, 100, 0.22);
+}
+
+.chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: linear-gradient(135deg, #f5c2dc, #d9c5f3);
+    color: #785b85;
+}
+
+.chat-header h3 {
+    margin: 0;
+}
+
+.btn-cerrar-x {
+    border: none;
+    background: transparent;
+    color: #76547f;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.chat-mensajes {
+    flex: 1;
+    padding: 13px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #fffaff;
+}
+
+.mensaje {
+    max-width: 85%;
+    padding: 10px 13px;
+    border-radius: 15px;
+    font-size: 13px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.mensaje.bot {
+    align-self: flex-start;
+    background: #f1e8ff;
+    color: #725c89;
+}
+
+.mensaje.usuario {
+    align-self: flex-end;
+    background: #ffe3f0;
+    color: #985d7c;
+}
+
+.chat-input-area {
+    display: flex;
+    gap: 7px;
+    padding: 10px;
+    border-top: 1px solid #f0d6e7;
+}
+
+.chat-input-area input {
+    flex: 1;
+    min-width: 0;
+    border: 1px solid #e8c8dd;
+    border-radius: 20px;
+    padding: 10px;
+    outline: none;
+    font-family: 'Nunito', sans-serif;
+}
+
+.chat-input-area button {
+    border: none;
+    border-radius: 20px;
+    padding: 9px 12px;
+    background: #df8bb7;
+    color: white;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+/* ============================================
+   CARRITO LATERAL
+   ============================================ */
+
+.overlay-carrito {
+    position: fixed;
+    inset: 0;
+    z-index: 1100;
+    background: rgba(50, 30, 55, 0.4);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+}
+
+.overlay-carrito.activo,
+.overlay-carrito.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.panel-carrito {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1101;
+    width: min(420px, 92vw);
+    height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    background: #fffaff;
+    box-shadow: -8px 0 25px rgba(80, 50, 90, 0.15);
+    transform: translateX(110%);
+    transition: transform 0.35s ease;
+    overflow-y: auto;
+}
+
+.panel-carrito.activo,
+.panel-carrito.open {
+    transform: translateX(0);
+}
+
+.encabezado-carrito {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid #f2c9df;
+    padding-bottom: 15px;
+}
+
+.encabezado-carrito h2 {
+    color: #c36c9f;
+    margin: 0;
+}
+
+.btn-cerrar-carrito {
+    border: none;
+    background: #f8e3f0;
+    color: #a85f8b;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+#listaCarrito {
+    flex: 1;
+    padding: 15px 0;
+}
+
+.carritoVacio {
+    text-align: center;
+    padding: 30px 10px;
+    color: #a78bad;
+}
+
+.productoCarrito {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 0;
+    border-bottom: 1px solid #f0dce9;
+}
+
+.miniaturaCarrito {
+    width: 55px;
+    height: 75px;
+    object-fit: contain;
+    border-radius: 6px;
+    background: white;
+}
+
+.infoCarrito {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.nombreCarrito {
+    color: #815b89;
+    font-weight: 900;
+    overflow-wrap: anywhere;
+}
+
+.precioCarrito {
+    color: #b875a1;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.cantidadControles {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cantidadControles button {
+    width: 25px;
+    height: 25px;
+    border: none;
+    border-radius: 50%;
+    background: #f3d8e9;
+    color: #945b83;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.eliminarProducto {
+    border: none;
+    background: transparent;
+    color: #d77b9d;
+    cursor: pointer;
+    font-size: 17px;
+}
+
+.resumen-carrito {
+    padding-top: 15px;
+    border-top: 2px solid #f2c9df;
+}
+
+.resumen-carrito p {
+    display: flex;
+    justify-content: space-between;
+    color: #835d89;
+    font-size: 17px;
+}
+
+.btn-finalizar {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 25px;
+    background: linear-gradient(135deg, #e985b7, #b18bdc);
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-size: 15px;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+/* ============================================
+   MENSAJE DE CARRITO
+   ============================================ */
+
+.mensaje-carrito {
+    display: none;
+    position: fixed;
+    bottom: 85px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1200;
+    padding: 13px 22px;
+    border-radius: 25px;
+    background: #e99ac1;
+    color: white;
+    font-weight: 900;
+    box-shadow: var(--sombra);
+}
+
+/* ============================================
+   BOTÓN VOLVER ARRIBA Y FOOTER
+   ============================================ */
+
+.btn-subir {
+    display: block;
+    margin: 20px auto 40px;
+    padding: 12px 22px;
+    border: none;
+    border-radius: 25px;
+    background: #e9dafa;
+    color: #8565a1;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+footer {
+    padding: 25px 15px;
+    text-align: center;
+    background: rgba(245, 224, 241, 0.9);
+    color: #a36e9c;
+    font-weight: 800;
+}
+
+/* ============================================
+   PANEL DE ADMINISTRACIÓN Y SOLICITUDES
+   ============================================ */
+
+#btnAdmin,
+.btn-admin,
+.boton-admin,
+#btnAdministracion {
+    position: fixed;
+    left: 18px;
+    bottom: 18px;
+    z-index: 1050;
+    border: 0;
+    border-radius: 28px;
+    padding: 12px 18px;
+    color: #fff;
+    background: linear-gradient(135deg, #a78bdb, #e77eae);
+    box-shadow: 0 7px 20px rgba(120, 80, 130, 0.25);
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    font-weight: 900;
+    cursor: pointer;
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+#btnAdmin:hover,
+.btn-admin:hover,
+.boton-admin:hover,
+#btnAdministracion:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(120, 80, 130, 0.3);
+}
+
+#panelAdmin,
+.panel-admin,
+.admin-panel {
+    position: fixed;
+    inset: 50% auto auto 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1300;
+    width: min(900px, calc(100vw - 28px));
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 25px;
+    border: 2px solid #efc3dc;
+    border-radius: 24px;
+    background: #fffaff;
+    color: var(--texto);
+    box-shadow: 0 18px 55px rgba(75, 45, 85, .28);
+}
+
+#panelAdmin h2,
+.panel-admin h2,
+.admin-panel h2 {
+    margin-top: 0;
+    color: #c36c9f;
+    text-align: center;
+}
+
+#panelAdmin button,
+.panel-admin button,
+.admin-panel button {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.admin-solicitud,
+.solicitud-admin,
+.tarjeta-solicitud {
+    margin: 12px 0;
+    padding: 16px;
+    border: 1px solid #f0c6dc;
+    border-radius: 16px;
+    background: #fff;
+    overflow-wrap: anywhere;
+}
+
+.admin-solicitud strong,
+.solicitud-admin strong,
+.tarjeta-solicitud strong {
+    color: #a65d91;
+}
+
+.admin-solicitud button,
+.solicitud-admin button,
+.tarjeta-solicitud button {
+    margin: 6px 5px 0 0;
+    padding: 9px 13px;
+    border: 0;
+    border-radius: 20px;
+    color: white;
+    background: linear-gradient(135deg, #e985b7, #b18bdc);
+}
+
+.admin-overlay,
+#overlayAdmin {
+    position: fixed;
+    inset: 0;
+    z-index: 1250;
+    background: rgba(55, 35, 60, .48);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 700px) {
+    .encabezado-principal {
+        padding: 20px 12px 28px;
+    }
+
+    .logo-img {
+        width: 165px;
+        height: 165px;
+    }
+
+    .titulo-con-pokemon {
+        gap: 12px;
+    }
+
+    .titulo-con-pokemon h1 {
+        font-size: clamp(34px, 9vw, 52px);
+    }
+
+    .pokemon-decoracion {
+        width: 65px;
+        height: 65px;
+    }
+
+    .frase-maquina {
+        font-size: 14px;
+    }
+
+    .contenedor-productos {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        width: 96%;
+    }
+
+    .producto {
+        padding: 9px;
+        border-radius: 16px;
+    }
+
+    .carta-3d {
+        width: 100%;
+        max-width: 155px;
+        height: 215px;
+    }
+
+    .info-carta .nombre-carta,
+    .nombre-carta {
+        font-size: 15px;
+        line-height: 1.2;
+    }
+
+    .info-carta .coleccion-carta,
+    .coleccion-carta {
+        font-size: 11px;
+    }
+
+    .info-carta .precio-cop,
+    .precio-cop {
+        font-size: 12px;
+    }
+
+    .btn-comprar {
+        font-size: 12px;
+    }
+
+    .seccion-solicitud {
+        padding: 22px 16px;
+    }
+
+    #contenedorChatbot {
+        right: 12px;
+        bottom: 12px;
+    }
+
+    #btnAdmin,
+    .btn-admin,
+    .boton-admin,
+    #btnAdministracion {
+        left: 10px;
+        bottom: 10px;
+        padding: 10px 13px;
+        font-size: 12px;
+    }
+
+    #panelAdmin,
+    .panel-admin,
+    .admin-panel {
+        padding: 17px;
+        max-height: 88vh;
+    }
+}
+
+@media (max-width: 380px) {
+    .pokemon-decoracion {
+        width: 48px;
+        height: 48px;
+    }
+
+    .titulo-con-pokemon h1 {
+        font-size: 32px;
+    }
+
+    .carta-3d {
+        height: 190px;
+    }
+}
+
+/* Accesibilidad: reducir animaciones si el dispositivo lo solicita */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
