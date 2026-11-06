@@ -1,24 +1,23 @@
+
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Pokebóveda - Tienda Pokémon TCG</title>
 
-    <link rel="stylesheet" href="STYLE.css">
+    <!-- IMPORTANTE: el archivo se llama style.css en minúsculas -->
+    <link rel="stylesheet" href="style.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Pacifico&family=Satisfy&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
     <!-- FONDO ANIMADO DE POKÉBOLAS -->
-
     <div class="pokemon-bg-animation">
         <div class="pokeball"></div>
         <div class="pokeball"></div>
@@ -31,33 +30,18 @@
     </div>
 
     <!-- ENCABEZADO -->
-
     <header class="encabezado-principal">
 
         <div class="logo">
-            <img
-                src="img/logo.png"
-                alt="Logo de Pokebóveda"
-                class="logo-img"
-            >
+            <img src="logo.png" alt="Logo de Pokebóveda" class="logo-img">
         </div>
 
         <div class="titulo-con-pokemon">
-
-            <img
-                src="img/pikachu.png"
-                alt="Pikachu"
-                class="pokemon-decoracion"
-            >
+            <img src="pikachu.png" alt="Pikachu" class="pokemon-decoracion">
 
             <h1>Pokebóveda</h1>
 
-            <img
-                src="img/togepi.png"
-                alt="Togepi"
-                class="pokemon-decoracion"
-            >
-
+            <img src="togepi.png" alt="Togepi" class="pokemon-decoracion">
         </div>
 
         <p class="frase-maquina">
@@ -67,26 +51,20 @@
         <a href="#solicitudPokemon" class="link-buscar-carta">
             🔎 ¿Buscas una carta en específico?
         </a>
-
     </header>
 
     <!-- BUSCADOR -->
-
     <section class="contenedor-busqueda">
-
         <input
             type="text"
             id="buscarPokemon"
             placeholder="🔍 Buscar carta Pokémon por nombre..."
             autocomplete="off"
         >
-
     </section>
 
     <!-- BOTÓN DEL CARRITO -->
-
     <div class="zona-carrito">
-
         <button
             id="btnAbrirCarrito"
             type="button"
@@ -95,13 +73,10 @@
             🛒 Carrito
             <span id="cantidadCarrito">0</span>
         </button>
-
     </div>
 
     <!-- CATÁLOGO -->
-
     <main>
-
         <section
             id="contenedorCartas"
             class="contenedor-productos"
@@ -110,16 +85,13 @@
                 ✨ Cargando tu colección Pokémon...
             </p>
         </section>
-
     </main>
 
     <!-- SOLICITUD DE CARTAS -->
-
     <section
         id="solicitudPokemon"
         class="seccion-solicitud"
     >
-
         <h2>💌 ¿Buscas una carta en específico?</h2>
 
         <p>
@@ -130,62 +102,42 @@
         <form id="formSolicitud" class="form-cute">
 
             <div class="grupo-input">
-
-                <label for="nombreCliente">
-                    Tu nombre:
-                </label>
-
+                <label for="nombreCliente">Tu nombre:</label>
                 <input
                     type="text"
                     id="nombreCliente"
                     placeholder="Ej: Ash Ketchum"
                     required
                 >
-
             </div>
 
             <div class="grupo-input">
-
-                <label for="emailCliente">
-                    Correo electrónico:
-                </label>
-
+                <label for="emailCliente">Correo electrónico:</label>
                 <input
                     type="email"
                     id="emailCliente"
                     placeholder="Ej: entrenador@pokeboveda.com"
                     required
                 >
-
             </div>
 
             <div class="grupo-input">
-
-                <label for="nombrePokemon">
-                    Pokémon o carta deseada:
-                </label>
-
+                <label for="nombrePokemon">Pokémon o carta deseada:</label>
                 <input
                     type="text"
                     id="nombrePokemon"
                     placeholder="Ej: Umbreon VMAX Alt Art"
                     required
                 >
-
             </div>
 
             <div class="grupo-input">
-
-                <label for="mensajeCliente">
-                    Detalles adicionales:
-                </label>
-
+                <label for="mensajeCliente">Detalles adicionales:</label>
                 <textarea
                     id="mensajeCliente"
                     rows="3"
                     placeholder="Ej: Busco la edición en español y estado Mint."
                 ></textarea>
-
             </div>
 
             <button type="submit" class="btn-enviar">
@@ -199,11 +151,9 @@
             class="mensaje-exito"
             style="display:none;"
         ></p>
-
     </section>
 
     <!-- VOLVER ARRIBA -->
-
     <button
         class="btn-subir"
         type="button"
@@ -213,7 +163,6 @@
     </button>
 
     <!-- CHATBOT POKEBOT -->
-
     <div id="contenedorChatbot">
 
         <button
@@ -231,7 +180,6 @@
         >
 
             <div class="chat-header">
-
                 <h3>✨ Pokebot ✨</h3>
 
                 <button
@@ -242,20 +190,16 @@
                 >
                     ✖
                 </button>
-
             </div>
 
             <div id="chatMensajes" class="chat-mensajes">
-
                 <div class="mensaje bot">
                     ¡Hola! 🌸 Soy Pokebot, tu asesor Pokémon.
                     ¿Buscas cartas para jugar, coleccionar o algún Pokémon en específico?
                 </div>
-
             </div>
 
             <div class="chat-input-area">
-
                 <input
                     type="text"
                     id="inputChat"
@@ -269,15 +213,12 @@
                 >
                     Enviar 💌
                 </button>
-
             </div>
 
         </div>
-
     </div>
 
     <!-- CARRITO DE COMPRAS -->
-
     <div
         id="overlayCarrito"
         class="overlay-carrito"
@@ -289,7 +230,6 @@
     >
 
         <div class="encabezado-carrito">
-
             <h2>🛒 Tu carrito</h2>
 
             <button
@@ -299,19 +239,15 @@
             >
                 ✕
             </button>
-
         </div>
 
         <div id="listaCarrito">
-
             <p class="carritoVacio">
                 Tu carrito está vacío 🛒
             </p>
-
         </div>
 
         <div class="resumen-carrito">
-
             <p>
                 Total:
                 <strong id="totalCarrito">$0</strong>
@@ -324,26 +260,22 @@
             >
                 Finalizar compra 💗
             </button>
-
         </div>
 
     </aside>
 
     <!-- MENSAJE DE CARRITO -->
-
     <div
         id="mensajeCarrito"
         class="mensaje-carrito"
     ></div>
 
     <!-- PIE DE PÁGINA -->
-
     <footer>
         💗 Esta página está hecha por Lorena y Anelis para el proyecto final de Jóvenes Creativos 💗
     </footer>
 
     <!-- JAVASCRIPT: RESPETAR ESTE ORDEN -->
-
     <script src="data.js"></script>
     <script src="cart.js"></script>
     <script src="script.js"></script>
