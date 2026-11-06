@@ -643,7 +643,9 @@ function crearTarjeta(carta) {
 
     const imagenReverso = document.createElement("img");
 
-    imagenReverso.src = "img/pokemon-back.png";
+    // Corregido: la imagen está junto a index.html, no dentro de img/
+    imagenReverso.src = "pokemon-back.png";
+
     imagenReverso.alt = "Reverso de carta Pokémon";
     imagenReverso.className = "carta-real";
 
