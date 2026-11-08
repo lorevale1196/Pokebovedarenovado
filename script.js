@@ -1246,3 +1246,50 @@ if (inputChat) {
 
 crearPanelAdmin();
 cargarCartas();
+
+
+/* ==================================
+   MOVIMIENTO DE LOS BOTONES FLOTANTES
+================================== */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    let ultimaPosicion = window.scrollY;
+
+    const botonSubir = document.querySelector(".btn-subir");
+
+    window.addEventListener("scroll", function () {
+
+        const posicionActual = window.scrollY;
+
+        // Detectar si estamos en la parte superior
+        if (posicionActual <= 50) {
+            document.body.classList.remove("scroll-down");
+
+            if (botonSubir) {
+                botonSubir.classList.remove("visible");
+            }
+
+        } else {
+
+            // Mostrar el botón de subir
+            if (botonSubir) {
+                botonSubir.classList.add("visible");
+            }
+
+            // Si bajas, ocultar el texto del carrito
+            if (posicionActual > ultimaPosicion + 3) {
+                document.body.classList.add("scroll-down");
+            }
+
+            // Si subes, mostrar nuevamente el texto
+            if (posicionActual < ultimaPosicion - 3) {
+                document.body.classList.remove("scroll-down");
+            }
+        }
+
+        ultimaPosicion = posicionActual;
+
+    });
+
+});

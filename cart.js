@@ -1,6 +1,6 @@
 
 /* ============================================
-   POKEBÓVEDA - SISTEMA DE CARRITO
+POKEBÓVEDA - SISTEMA DE CARRITO
    ============================================ */
 
 "use strict";
@@ -11,7 +11,7 @@ const WHATSAPP_NUMERO = "573245427319";
 let cart = cargarCarrito();
 
 /* ============================================
-   CARGAR Y GUARDAR CARRITO
+CARGAR Y GUARDAR CARRITO
    ============================================ */
 
 function cargarCarrito() {
@@ -64,35 +64,62 @@ function buscarProducto(id) {
 function obtenerPrecio(producto) {
     if (!producto) return null;
 
+    // Precios de las cartas de data.js
     if (producto.price !== undefined && producto.price !== null) {
         const precio = Number(producto.price);
 
-        return Number.isFinite(precio) ? precio : null;
+        if (Number.isFinite(precio)) {
+            return precio;
+        }
     }
 
+    // Precios de las cartas cargadas desde TCGDex
+    if (producto.precioCOP !== undefined && producto.precioCOP !== null) {
+        const precio = Number(producto.precioCOP);
+
+        if (Number.isFinite(precio)) {
+            return precio;
+        }
+    }
+
+    // Compatibilidad con otros productos
     if (producto.priceCOP !== undefined && producto.priceCOP !== null) {
         const precio = Number(
             String(producto.priceCOP).replace(/[^\d]/g, "")
         );
 
-        return Number.isFinite(precio) ? precio : null;
+        if (Number.isFinite(precio)) {
+            return precio;
+        }
     }
 
     return null;
 }
 
 function mostrarPrecio(producto) {
-    const precio = obtenerPrecio(producto);
+    const precioCOP = obtenerPrecio(producto);
 
-    if (precio === null) {
+    if (precioCOP === null) {
         return "Precio por consultar";
     }
 
-    if (typeof formatPrice === "function") {
-        return formatPrice(precio);
-    }
+    const tasa = window.tasaCambioUSD_COP;
 
-    return "$" + precio.toLocaleString("es-CO");
+    const precioUSD = tasa
+        ? precioCOP / tasa
+        : null;
+
+    const cop = typeof formatearCOP === "function"
+        ? formatearCOP(precioCOP)
+        : "$" + precioCOP.toLocaleString("es-CO");
+
+    const usd = precioUSD !== null
+        ? (typeof formatearUSD === "function"
+            ? formatearUSD(precioUSD)
+            : "$" + precioUSD.toFixed(2))
+        : "No disponible";
+
+return `COP: ${cop}\nUSD: ${usd}`;
 }
 
 /* ============================================
@@ -241,13 +268,11 @@ function renderCart() {
         contador.textContent = contarItems();
     }
 
-    if (totalElemento) {
-        totalElemento.textContent =
-            typeof formatPrice === "function"
-                ? formatPrice(calcularTotal())
-                : "$" + calcularTotal().toLocaleString("es-CO");
-    }
-
+if (totalElemento) {
+    totalElemento.textContent = mostrarPrecio({
+        price: calcularTotal()
+    });
+}
     if (!lista) return;
 
     if (cart.length === 0) {

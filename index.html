@@ -47,33 +47,32 @@
         <p class="frase-maquina">
             ✨ Cartas Pokémon TCG Originales & Coleccionables ✨
         </p>
-
-        <a href="#solicitudPokemon" class="link-buscar-carta">
-            🔎 ¿Buscas una carta en específico?
-        </a>
+    <a href="#solicitudPokemon" class="link-buscar-carta">
+    🔎 ¿Buscas una carta en específico? 💌
+    </a>
     </header>
 
-    <!-- BUSCADOR -->
-    <section class="contenedor-busqueda">
-        <input
-            type="text"
-            id="buscarPokemon"
-            placeholder="🔍 Buscar carta Pokémon por nombre..."
-            autocomplete="off"
-        >
-    </section>
 
-    <!-- BOTÓN DEL CARRITO -->
+<section class="contenedor-busqueda">
+
+    <input
+        type="text"
+        id="buscarPokemon"
+        placeholder="🔍 Buscar carta Pokémon por nombre..."
+        autocomplete="off"
+    >
+
+    <!-- CARRITO AL LADO DEL BUSCADOR -->
     <div class="zona-carrito">
-        <button
-            id="btnAbrirCarrito"
-            type="button"
-            onclick="abrirCarrito()"
-        >
-            🛒 Carrito
+        <button id="btnAbrirCarrito" onclick="abrirCarrito()">
+            <span class="icono-carrito">🛒</span>
+            <span class="texto-carrito">Carrito</span>
             <span id="cantidadCarrito">0</span>
         </button>
     </div>
+
+</section>
+
 
     <!-- CATÁLOGO -->
     <main>
