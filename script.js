@@ -1,15 +1,8 @@
 
-/* ============================================
-   POKÉBÓVEDA - SCRIPT PRINCIPAL
-   Catálogo + precios + buscador + carrito
-   Pokebot + administración + solicitudes
-   ============================================ */
-
+// Pokebóveda Renovada - Script principal
 "use strict";
 
-/* ============================================
-   CONFIGURACIÓN
-   ============================================ */
+//configuración de la API y constantes";
 
 const API_BASE = "https://api.tcgdex.net/v2/en";
 
@@ -29,17 +22,13 @@ let listaPokemon = [];
 let cargandoCartas = false;
 let tasaUSD_COP = null;
 
-/* ============================================
-   ELEMENTOS
-   ============================================ */
+// Elementos del DOM
 
 const buscador = document.getElementById("buscarPokemon");
 const contenedorCartas = document.getElementById("contenedorCartas");
 const formSolicitud = document.getElementById("formSolicitud");
 
-/* ============================================
-   UTILIDADES
-   ============================================ */
+// Funciones auxiliares
 
 function normalizarTexto(texto) {
     return String(texto || "")
@@ -92,9 +81,7 @@ function guardarSolicitudes(solicitudes) {
     );
 }
 
-/* ============================================
-   EXCLUIR NEO REVELATION
-   ============================================ */
+// Función para identificar si una colección es "Neo Revelation"
 
 function esNeoRevelation(set) {
     const nombre = normalizarTexto(set?.name);
@@ -107,9 +94,7 @@ function esNeoRevelation(set) {
     );
 }
 
-/* ============================================
-   CARGAR TASA USD A COP
-   ============================================ */
+// Función para cargar la tasa de cambio USD/COP desde la API y almacenarla en localStorage.
 
 async function cargarTasaCambio() {
     try {
@@ -171,9 +156,7 @@ async function cargarTasaCambio() {
     }
 }
 
-/* ============================================
-   FORMATEAR PRECIOS
-   ============================================ */
+// Funciones para formatear precios en USD y COP.
 
 function formatearUSD(valor) {
     return new Intl.NumberFormat("en-US", {
@@ -192,9 +175,7 @@ function formatearCOP(valor) {
     }).format(valor);
 }
 
-/* ============================================
-   CACHÉ DE PRECIOS
-   ============================================ */
+// Funciones para manejar el caché de precios en localStorage.
 
 function obtenerCachePrecios() {
     try {
@@ -221,9 +202,7 @@ function guardarCachePrecios(cache) {
     }
 }
 
-/* ============================================
-   EXTRAER PRECIO DE MERCADO
-   ============================================ */
+// Función para obtener el precio de una variante de carta.
 
 function obtenerPrecioDeVariante(datos) {
     if (!datos || typeof datos !== "object") {
@@ -317,9 +296,7 @@ function extraerPrecioUSD(detalle) {
     return null;
 }
 
-/* ============================================
-   OBTENER PRECIO DE UNA CARTA
-   ============================================ */
+// Función para obtener el precio de una carta, usando caché y la API.
 
 async function obtenerPrecioCarta(carta) {
     const cache = obtenerCachePrecios();
@@ -359,9 +336,7 @@ async function obtenerPrecioCarta(carta) {
     }
 }
 
-/* ============================================
-   ACTUALIZAR PRECIOS DEL CATÁLOGO
-   ============================================ */
+// Función para actualizar los precios de todas las cartas, consultando la API en grupos y usando caché.
 
 async function actualizarPreciosCartas() {
     if (!todasLasCartas.length) return;
@@ -421,55 +396,58 @@ async function actualizarPreciosCartas() {
     console.log("Consulta de precios terminada.");
 }
 
-/* ============================================
-   MOSTRAR PRECIO EN LA TARJETA
-   SIN FUENTE NI FECHA VISIBLES
-   ============================================ */
+
+// Función para crear el elemento de precio en la tarjeta de carta.
 
 function crearElementoPrecio(carta) {
+
     const precio = document.createElement("p");
 
-    precio.className = "precio-cop";
-    precio.style.whiteSpace = "pre-line";
+    precio.className = "precio-carta";
 
     const referencia = carta.precioReferencia;
 
-    if (!referencia || !Number(referencia.usd)) {
-        precio.textContent = "Precio de referencia no disponible";
-
-        precio.title =
-            "Esta carta no tiene un precio de mercado publicado.";
+    // Comprobar si existe un precio en USD
+    if (
+        !referencia ||
+        !Number.isFinite(Number(referencia.usd))
+    ) {
+        precio.textContent =
+            "USD: Precio no disponible\nCOP: Precio no disponible";
 
         return precio;
     }
 
-    const lineaUSD = `USD: ${formatearUSD(referencia.usd)}`;
+    const valorUSD = Number(referencia.usd);
 
+    // Calcular el precio en pesos colombianos
     let lineaCOP = "";
 
     if (tasaUSD_COP) {
-        const valorCOP = referencia.usd * tasaUSD_COP;
+
+        const valorCOP = valorUSD * tasaUSD_COP;
 
         carta.precioCOP = valorCOP;
 
-        lineaCOP = `\nCOP: ${formatearCOP(valorCOP)}`;
+        lineaCOP = `COP: ${formatearCOP(valorCOP)}`;
 
     } else {
-        lineaCOP = "\nCOP: conversión no disponible";
+
+        carta.precioCOP = null;
+
+        lineaCOP = "COP: conversión no disponible";
+
     }
 
-    precio.textContent = `${lineaUSD}${lineaCOP}`;
+    // Mostrar el precio en dólares
+    const lineaUSD = `USD: ${formatearUSD(valorUSD)}`;
 
-    precio.title =
-        "Precio orientativo de mercado. Puede variar según " +
-        "la condición, edición y acabado de la carta.";
+    // Mostrar ambos precios en líneas separadas
+    precio.textContent = `${lineaCOP}\n${lineaUSD}`;
 
     return precio;
 }
-
-/* ============================================
-   CARGAR COLECCIONES RECIENTES
-   ============================================ */
+//Código para obtener las colecciones de cartas desde la API, filtrando y ordenando según la fecha de lanzamiento.
 
 async function obtenerColecciones() {
     const colecciones = await obtenerDatos(
@@ -490,9 +468,7 @@ async function obtenerColecciones() {
         .slice(0, MAX_COLECCIONES);
 }
 
-/* ============================================
-   OBTENER CARTAS DE CADA COLECCIÓN
-   ============================================ */
+// Función para obtener las cartas de una colección específica, filtrando y normalizando los datos.
 
 async function obtenerCartasColeccion(coleccion) {
     try {
@@ -538,9 +514,7 @@ async function obtenerCartasColeccion(coleccion) {
     }
 }
 
-/* ============================================
-   CARGAR CATÁLOGO
-   ============================================ */
+// Función principal para cargar todas las cartas Pokémon, consultando la API en grupos y mostrando mensajes de estado.
 
 async function cargarCartas() {
     if (cargandoCartas || !contenedorCartas) return;
@@ -597,9 +571,7 @@ async function cargarCartas() {
     }
 }
 
-/* ============================================
-   CREAR TARJETA
-   ============================================ */
+// Función para crear la tarjeta de una carta Pokémon, incluyendo imagen, información y botón de carrito.
 
 function crearTarjeta(carta) {
     const producto = document.createElement("article");
@@ -720,9 +692,7 @@ function crearTarjeta(carta) {
     return producto;
 }
 
-/* ============================================
-   MOSTRAR CARTAS
-   ============================================ */
+// Función para mostrar un conjunto de cartas en el contenedor principal.
 
 function mostrarCartas(cartas) {
     if (!contenedorCartas) return;
@@ -746,9 +716,7 @@ function mostrarCartas(cartas) {
     contenedorCartas.appendChild(fragmento);
 }
 
-/* ============================================
-   BUSCADOR
-   ============================================ */
+// Función para buscar cartas Pokémon según el término ingresado en el buscador.
 
 function buscarPokemon() {
     if (!buscador) return;
@@ -770,9 +738,7 @@ if (buscador) {
     buscador.addEventListener("input", buscarPokemon);
 }
 
-/* ============================================
-   FORMULARIO DE SOLICITUDES
-   ============================================ */
+// Funciones para manejar el formulario de solicitud de cartas Pokémon.
 
 if (formSolicitud) {
     formSolicitud.addEventListener("submit", function (evento) {
@@ -828,40 +794,11 @@ if (formSolicitud) {
         }, 5000);
     });
 }
+const botonAdmin = document.getElementById("botonAdmin");
 
-/* ============================================
-   PANEL DE ADMINISTRACIÓN
-   ============================================ */
-
-function crearPanelAdmin() {
-    if (document.getElementById("botonAdmin")) return;
-
-    const botonAdmin = document.createElement("button");
-
-    botonAdmin.id = "botonAdmin";
-    botonAdmin.type = "button";
-    botonAdmin.textContent = "⚙️ Administración";
-
-    botonAdmin.style.cssText = `
-        position: fixed;
-        bottom: 20px;
-        left: 20px;
-        z-index: 9998;
-        background: #8e69b5;
-        color: white;
-        border: none;
-        border-radius: 25px;
-        padding: 12px 18px;
-        font-weight: bold;
-        cursor: pointer;
-        box-shadow: 0 4px 12px rgba(0,0,0,.2);
-    `;
-
-    document.body.appendChild(botonAdmin);
-
+if (botonAdmin) {
     botonAdmin.addEventListener("click", abrirAdministracion);
 }
-
 function abrirAdministracion() {
     const clave = prompt("Introduce la clave de administración:");
 
@@ -1101,9 +1038,7 @@ function renderizarSolicitudesAdmin() {
     });
 }
 
-/* ============================================
-   CHATBOT POKEBOT
-   ============================================ */
+//código para el chatbot de Pokebóveda.
 
 const btnChatbot = document.getElementById("btnChatbot");
 const ventanaChat = document.getElementById("ventanaChat");
@@ -1239,18 +1174,7 @@ if (inputChat) {
         }
     });
 }
-
-/* ============================================
-   INICIAR PÁGINA
-   ============================================ */
-
-crearPanelAdmin();
 cargarCartas();
-
-
-/* ==================================
-   MOVIMIENTO DE LOS BOTONES FLOTANTES
-================================== */
 
 document.addEventListener("DOMContentLoaded", function () {
 

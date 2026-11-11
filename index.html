@@ -6,18 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Pokebóveda - Tienda Pokémon TCG</title>
-
-    <!-- IMPORTANTE: el archivo se llama style.css en minúsculas -->
     <link rel="stylesheet" href="style.css">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Pacifico&family=Satisfy&display=swap" rel="stylesheet">
 </head>
 
 <body>
-
-    <!-- FONDO ANIMADO DE POKÉBOLAS -->
     <div class="pokemon-bg-animation">
         <div class="pokeball"></div>
         <div class="pokeball"></div>
@@ -29,7 +24,6 @@
         <div class="pokeball"></div>
     </div>
 
-    <!-- ENCABEZADO -->
     <header class="encabezado-principal">
 
         <div class="logo">
@@ -47,9 +41,9 @@
         <p class="frase-maquina">
             ✨ Cartas Pokémon TCG Originales & Coleccionables ✨
         </p>
-    <a href="#solicitudPokemon" class="link-buscar-carta">
-    🔎 ¿Buscas una carta en específico? 💌
-    </a>
+        <button id="botonAdmin" type="button" title="Administración" aria-label="Administración">
+        ⚙️
+    </button>
     </header>
 
 
@@ -62,15 +56,19 @@
         autocomplete="off"
     >
 
-    <!-- CARRITO AL LADO DEL BUSCADOR -->
-    <div class="zona-carrito">
-        <button id="btnAbrirCarrito" onclick="abrirCarrito()">
-            <span class="icono-carrito">🛒</span>
-            <span class="texto-carrito">Carrito</span>
-            <span id="cantidadCarrito">0</span>
-        </button>
-    </div>
+<div class="zona-carrito">
 
+    <button id="btnAbrirCarrito" onclick="abrirCarrito()">
+        <span class="icono-carrito">🛒</span>
+        <span class="texto-carrito">Carrito</span>
+        <span id="cantidadCarrito">0</span>
+    </button>
+
+    <a href="#solicitudPokemon" class="link-buscar-carta">
+        🔎 ¿Necesitas ayuda? 💌
+    </a>
+
+</div>
 </section>
 
 
@@ -245,21 +243,30 @@
                 Tu carrito está vacío 🛒
             </p>
         </div>
+<div class="resumen-carrito">
 
-        <div class="resumen-carrito">
-            <p>
-                Total:
-                <strong id="totalCarrito">$0</strong>
-            </p>
+    <p class="total-carrito">
+        Total:
+        <strong id="totalCarrito">$0</strong>
+    </p>
 
-            <button
-                onclick="finalizarCompra()"
-                class="btn-finalizar"
-                type="button"
-            >
-                Finalizar compra 💗
-            </button>
-        </div>
+    <button
+        onclick="vaciarCarrito()"
+        class="btn-vaciar"
+        type="button"
+    >
+        🗑️ Eliminar todo
+    </button>
+
+    <button
+        onclick="finalizarCompra()"
+        class="btn-finalizar"
+        type="button"
+    >
+        Finalizar compra 💗
+    </button>
+
+</div>
 
     </aside>
 

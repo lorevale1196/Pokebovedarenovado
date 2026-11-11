@@ -1,8 +1,5 @@
 
-/* ============================================
-POKEBÓVEDA - SISTEMA DE CARRITO
-   ============================================ */
-
+// SISTEMA DE CARRITO
 "use strict";
 
 const CART_STORAGE_KEY = "pokeboveda_carrito";
@@ -10,9 +7,7 @@ const WHATSAPP_NUMERO = "573245427319";
 
 let cart = cargarCarrito();
 
-/* ============================================
-CARGAR Y GUARDAR CARRITO
-   ============================================ */
+//Se carga el carrito desde el almacenamiento local (localStorage) y se asegura de que los datos sean válidos.
 
 function cargarCarrito() {
     try {
@@ -33,9 +28,7 @@ function guardarCarrito() {
     localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
 }
 
-/* ============================================
-   BUSCAR PRODUCTO O CARTA
-   ============================================ */
+// Buscar un producto por su ID en las listas de productos disponibles.
 
 function buscarProducto(id) {
     let producto = null;
@@ -57,9 +50,7 @@ function buscarProducto(id) {
     return producto || null;
 }
 
-/* ============================================
-   OBTENER PRECIO
-   ============================================ */
+// Obtener el precio de un producto, considerando diferentes fuentes de datos.
 
 function obtenerPrecio(producto) {
     if (!producto) return null;
@@ -97,6 +88,7 @@ function obtenerPrecio(producto) {
 }
 
 function mostrarPrecio(producto) {
+
     const precioCOP = obtenerPrecio(producto);
 
     if (precioCOP === null) {
@@ -119,12 +111,10 @@ function mostrarPrecio(producto) {
             : "$" + precioUSD.toFixed(2))
         : "No disponible";
 
-return `COP: ${cop}\nUSD: ${usd}`;
+    return `COP: ${cop}\nUSD: ${usd}`;
 }
 
-/* ============================================
-   AGREGAR AL CARRITO
-   ============================================ */
+// Agregar un producto al carrito.
 
 function addToCart(id) {
     const producto = buscarProducto(id);
@@ -152,9 +142,7 @@ function addToCart(id) {
     mostrarMensajeCarrito();
 }
 
-/* ============================================
-   CAMBIAR CANTIDAD
-   ============================================ */
+// Cambiar la cantidad de un producto en el carrito.
 
 function changeQty(id, delta) {
     const item = cart.find(
@@ -174,9 +162,18 @@ function changeQty(id, delta) {
     renderCart();
 }
 
-/* ============================================
-   ELIMINAR PRODUCTO
-   ============================================ */
+//Vaciar carrito.
+
+function vaciarCarrito() {
+
+    cart = [];
+
+    guardarCarrito();
+    renderCart();
+
+}
+
+//Eliminar un producto del carrito.
 
 function removeFromCart(id) {
     cart = cart.filter(
@@ -187,9 +184,7 @@ function removeFromCart(id) {
     renderCart();
 }
 
-/* ============================================
-   CALCULAR TOTAL
-   ============================================ */
+//calcular el total del carrito.
 
 function calcularTotal() {
     return cart.reduce((total, item) => {
@@ -206,9 +201,7 @@ function calcularTotal() {
     }, 0);
 }
 
-/* ============================================
-   CONTAR PRODUCTOS
-   ============================================ */
+//contar la cantidad de items en el carrito.
 
 function contarItems() {
     return cart.reduce(
@@ -217,9 +210,7 @@ function contarItems() {
     );
 }
 
-/* ============================================
-   ESCAPAR TEXTO HTML
-   ============================================ */
+//Escapar caracteres especiales para evitar problemas de seguridad y visualización.
 
 function escaparHTML(texto) {
     return String(texto ?? "").replace(/[&<>"']/g, caracter => {
@@ -235,9 +226,7 @@ function escaparHTML(texto) {
     });
 }
 
-/* ============================================
-   OBTENER IMAGEN DEL PRODUCTO
-   ============================================ */
+//Obtener la imagen de un producto para el carrito.
 
 function obtenerImagenCarrito(producto) {
     if (!producto || !producto.image) {
@@ -246,7 +235,7 @@ function obtenerImagenCarrito(producto) {
 
     const imagen = String(producto.image);
 
-    // Las imágenes de TCGdex necesitan su tamaño.
+    // Las imágenes de TCGdex necesitan su tamaño.  
     if (imagen.includes("assets.tcgdex.net") &&
         !/\.(png|webp|jpg|jpeg)$/i.test(imagen)) {
         return `${imagen.replace(/\/+$/, "")}/low.webp`;
@@ -255,9 +244,7 @@ function obtenerImagenCarrito(producto) {
     return imagen;
 }
 
-/* ============================================
-   MOSTRAR CARRITO
-   ============================================ */
+//Mostrar el contenido del carrito en el panel.
 
 function renderCart() {
     const lista = document.getElementById("listaCarrito");
@@ -360,9 +347,7 @@ if (totalElemento) {
     `;
 }
 
-/* ============================================
-   ABRIR CARRITO
-   ============================================ */
+//Abrir el panel del carrito.
 
 function abrirCarrito() {
     const panel = document.getElementById("panelCarrito");
@@ -379,9 +364,7 @@ function abrirCarrito() {
     renderCart();
 }
 
-/* ============================================
-   CERRAR CARRITO
-   ============================================ */
+//Cerrar el panel del carrito.
 
 function cerrarCarrito() {
     const panel = document.getElementById("panelCarrito");
@@ -396,9 +379,7 @@ function cerrarCarrito() {
     }
 }
 
-/* ============================================
-   MENSAJE DE PRODUCTO AGREGADO
-   ============================================ */
+//Mostrar un mensaje temporal cuando se agrega un producto al carrito.
 
 function mostrarMensajeCarrito() {
     const mensaje = document.getElementById("mensajeCarrito");
@@ -413,9 +394,7 @@ function mostrarMensajeCarrito() {
     }, 2000);
 }
 
-/* ============================================
-   FINALIZAR COMPRA POR WHATSAPP
-   ============================================ */
+//Finalizar la compra por WhatsApp.
 
 function finalizarCompra() {
     if (cart.length === 0) {
@@ -472,9 +451,7 @@ function finalizarCompra() {
     window.open(url, "_blank");
 }
 
-/* ============================================
-   INICIALIZAR CARRITO
-   ============================================ */
+// Inicializar el carrito al cargar la página.
 
 document.addEventListener("DOMContentLoaded", function () {
     const overlay = document.getElementById("overlayCarrito");
@@ -485,10 +462,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     renderCart();
 });
-
-/* ============================================
-   FUNCIONES DISPONIBLES PARA EL HTML
-   ============================================ */
 
 window.addToCart = addToCart;
 window.changeQty = changeQty;
